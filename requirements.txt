@@ -2,3 +2,4 @@ Flask
 pymongo
 Flask-Bcrypt
 flask_session
+dotenv

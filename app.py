@@ -2,13 +2,16 @@ from flask import Flask, render_template, request, jsonify, redirect, url_for, s
 from pymongo import MongoClient
 from bcrypt import hashpw, gensalt, checkpw
 from werkzeug.utils import secure_filename
-import os, random, csv, io
+import os, random, csv, io, dotenv
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = '123'
+dotenv.load_dotenv()
 
-client = MongoClient('localhost', 27017)
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+
+client = MongoClient(os.getenv('DATABASE_URI'))
+
 db = client['wt_project']
 products_collection = db["products"]
 accounts_collection = db["accounts"]
